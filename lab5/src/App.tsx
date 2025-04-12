@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   interface Todo {
     description: string;
-    completed: boolean
+    completed?: boolean
     completedDate?: string
     id: number;
   }
@@ -13,6 +13,7 @@ function App() {
   const [id, setId] = useState<number>();
   const [todoDescription, setTodoDescription] = useState('');
   const [todoList, setTodoList] = useState<Todo[]>([]);
+  
   const [findId, setFindId] = useState<number>();
   const [updateDescription, setUpdateDescription] = useState('');
   const [isEditing, setIsEditing] = useState(false);
