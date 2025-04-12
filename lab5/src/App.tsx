@@ -5,6 +5,8 @@ import './App.css';
 function App() {
   interface Todo {
     description: string;
+    completed: boolean
+    completedDate?: string
     id: number;
   }
 
@@ -117,6 +119,19 @@ function App() {
     setTodoList(updatedTodoList);
   };
 
+  const handleCheckboxChange = (index: number) => {
+    const updatedList = [...todoList]
+    const todo = updatedList[index]
+    
+    todo.completed = !todo.completed
+    todo.completedDate = todo.completed ? new Date().toLocaleString() : undefined
+
+    const completedTasks = updatedList.filter((t) => t.completed)
+    const incompleteTasks = updatedList.filter((t) => !t.completed)
+    setTodoList([...incompleteTasks, ...completedTasks])
+  }
+
+
   return (
     <>
       <div style={{ border: '1px solid red', padding: 10 }}>
@@ -170,12 +185,20 @@ function App() {
         {}
         <div><strong>Todos Here:</strong></div>
         <ul>
-          {todoList.map((todo) => (
-            <li key={todo.id}>
-              <input type="checkbox" />
-              <p>Description: {todo.description}, Id: {todo.id}</p>
-              <br />
-            </li>
+          {todoList.map((todo, index) => (
+             <li key={index}>
+             <input
+               type="checkbox"
+               checked={todo.completed}
+               onChange={() => handleCheckboxChange(index)}
+             />
+             {todo.description}
+             {todo.completed && (
+               <span>
+                 (Hecho en: {todo.completedDate})
+               </span>
+             )}
+           </li>
           ))}
         </ul>
 
