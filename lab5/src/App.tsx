@@ -193,7 +193,7 @@ function App() {
                checked={todo.completed}
                onChange={() => handleCheckboxChange(index)}
              />
-             {todo.description}
+             <p>Description:  {todo.description}, Id:  {todo.id} </p>
              {todo.completed && (
                <span>
                  (Hecho en: {todo.completedDate})
